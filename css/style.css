@@ -1,0 +1,470 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: "Nunito Sans", sans-serif;
+}
+
+body {
+  background-color: #fafafa;
+}
+
+.dark {
+  background-color: #202c36;
+}
+
+.container {
+  max-width: 1340px;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+header {
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  width: 100%;
+  padding: 23px 0 24px 0;
+  background-color: #ffffff;
+}
+.dark header {
+  background-color: #2b3844;
+}
+header nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+header nav .nav-logo {
+  white-space: nowrap;
+  font-family: Nunito Sans;
+  font-weight: 800;
+  font-size: clamp(12px, 5vw, 24px);
+  line-height: 100%;
+  letter-spacing: 0px;
+  color: #111517;
+}
+.dark header nav .nav-logo {
+  color: #ffffff;
+}
+header nav .dark-mode {
+  cursor: pointer;
+  white-space: nowrap;
+  border: none;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+header nav .dark-mode span {
+  font-family: Nunito Sans;
+  font-weight: 600;
+  font-size: clamp(12px, 5vw, 16px);
+  line-height: 100%;
+  letter-spacing: 0px;
+  color: #111517;
+}
+.dark header nav .dark-mode span {
+  color: #ffffff;
+}
+.dark header nav .dark-mode img {
+  filter: brightness(0) invert(1);
+}
+
+section {
+  background-color: #fafafa;
+  padding: 100px 0 45px 0;
+}
+.dark section {
+  background-color: #202c36;
+}
+section .section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+@media (max-width: 768px) {
+  section .section-header {
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+  }
+}
+section .section-header .card-search {
+  max-width: 480px;
+  width: 100%;
+  height: 56px;
+  position: relative;
+}
+@media (max-width: 768px) {
+  section .section-header .card-search {
+    max-width: 100%;
+  }
+}
+section .section-header .card-search input {
+  background-color: #ffffff;
+  box-shadow: 0px 2px 9px 0px rgba(0, 0, 0, 0.0549019608);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  padding-left: 74px;
+  outline: none;
+  border: none;
+  width: 100%;
+  height: 100%;
+  font-family: Nunito Sans;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0px;
+  color: #848484;
+}
+.dark section .section-header .card-search input {
+  background-color: #2b3844;
+  color: #ffffff;
+  box-shadow: 0px 2px 9px 0px rgba(0, 0, 0, 0.0549019608);
+}
+.dark section .section-header .card-search input::-moz-placeholder {
+  color: #ffffff;
+}
+.dark section .section-header .card-search input::placeholder {
+  color: #ffffff;
+}
+section .section-header .card-search img {
+  padding: 21px 0 26px 34px;
+  top: 0;
+  left: 0;
+  position: absolute;
+}
+.dark section .section-header .card-search img {
+  filter: brightness(0) invert(1);
+}
+section .section-header .card-sorted {
+  max-width: 200px;
+  width: 100%;
+  height: 56px;
+  position: relative;
+}
+section .section-header .card-sorted select {
+  position: absolute;
+  padding: 18px 24px 18px 24px;
+  background-color: #ffffff;
+  box-shadow: 0px 2px 9px 0px rgba(0, 0, 0, 0.0549019608);
+  border: none;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  font-family: Nunito Sans;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0px;
+  color: #111517;
+}
+.dark section .section-header .card-sorted select {
+  background-color: #2b3844;
+  color: #ffffff;
+  box-shadow: 0px 2px 9px 0px rgba(0, 0, 0, 0.0549019608);
+}
+section .countries-cards {
+  padding-top: 48px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 75px;
+}
+@media (max-width: 1309px) {
+  section .countries-cards {
+    gap: 10px;
+    place-items: center;
+  }
+}
+@media (max-width: 1108px) {
+  section .countries-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 843px) {
+  section .countries-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 564px) {
+  section .countries-cards {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+section .countries-cards .countries-card {
+  width: 264px;
+  border-radius: 5px;
+  background-color: #ffffff;
+  box-shadow: 0px 0px 7px 2px rgba(0, 0, 0, 0.031372549);
+}
+.dark section .countries-cards .countries-card {
+  background-color: #2b3844;
+  box-shadow: 0px 0px 7px 2px rgba(0, 0, 0, 0.031372549);
+}
+section .countries-cards .countries-card a {
+  width: 264px;
+}
+section .countries-cards .countries-card a img {
+  width: 100%;
+  height: 160px;
+  border-radius: 5px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+section .countries-cards .countries-card .countries-text {
+  padding: 24px 24px 46px 24px;
+}
+section .countries-cards .countries-card .countries-text h3 {
+  padding: 0 0 16px 0;
+  font-family: Nunito Sans;
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 26px;
+  letter-spacing: 0px;
+  color: #111517;
+}
+.dark section .countries-cards .countries-card .countries-text h3 {
+  color: #ffffff;
+}
+section .countries-cards .countries-card .countries-text h4 {
+  padding-top: 8px;
+  font-family: Nunito Sans;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0px;
+  color: #111517;
+}
+.dark section .countries-cards .countries-card .countries-text h4 {
+  color: #ffffff;
+}
+section .countries-cards .countries-card .countries-text h4 span {
+  font-family: Nunito Sans;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0px;
+}
+section .pagination {
+  padding: 40px 0;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+@media (max-width: 420px) {
+  section .pagination {
+    gap: 5px;
+  }
+}
+section .pagination button {
+  color: #ffffff;
+  background-color: #848484;
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
+  border: none;
+  font-size: 20px;
+}
+section .pagination button img {
+  filter: brightness(0) invert(1);
+}
+@media (max-width: 420px) {
+  section .pagination button {
+    padding: 3px;
+  }
+}
+section .pagination .active {
+  color: #ffffff;
+  background-color: #ef0909;
+}
+
+.countries-full-page {
+  background-color: #ffffff;
+}
+.dark .countries-full-page {
+  background-color: #202c36;
+}
+.countries-full-page .back {
+  cursor: pointer;
+  margin-bottom: 100px;
+  border: none;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.dark .countries-full-page .back img {
+  filter: brightness(0) invert(1);
+}
+.countries-full-page .back span {
+  color: #111517;
+  font-family: Nunito Sans;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0px;
+}
+.dark .countries-full-page .back span {
+  color: #ffffff;
+}
+.countries-full-page .countries-full-page-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 20px;
+}
+@media (max-width: 858px) {
+  .countries-full-page .countries-full-page-card {
+    flex-direction: column;
+  }
+}
+.countries-full-page .countries-full-page-card .countries-full-page-card-image {
+  width: clamp 560px;
+  height: 401px;
+}
+.countries-full-page .countries-full-page-card .countries-full-page-card-image img {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+}
+.countries-full-page .countries-full-page-card .countries-full-page-card-texts {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.countries-full-page .countries-full-page-card .countries-full-page-card-texts h3 {
+  font-family: Nunito Sans;
+  font-weight: 800;
+  font-size: 32px;
+  line-height: 100%;
+  letter-spacing: 0px;
+  color: #111517;
+}
+.dark .countries-full-page .countries-full-page-card .countries-full-page-card-texts h3 {
+  color: #ffffff;
+}
+.countries-full-page .countries-full-page-card .countries-full-page-card-texts h4 {
+  font-family: Nunito Sans;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 32px;
+  letter-spacing: 0px;
+  color: #111517;
+}
+.countries-full-page .countries-full-page-card .countries-full-page-card-texts h4 span {
+  font-family: Nunito Sans;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 32px;
+  letter-spacing: 0px;
+}
+.dark .countries-full-page .countries-full-page-card .countries-full-page-card-texts h4 {
+  color: #ffffff;
+}
+
+.loading {
+  z-index: 1000;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #ffffff;
+}
+.dark .loading {
+  background-color: #202c36;
+}
+
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loaderMiniContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 130px;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
+.barContainer {
+  width: 100%;
+  height: -moz-fit-content;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 10px;
+  background-position: left;
+}
+
+.bar {
+  width: 100%;
+  height: 8px;
+  background: linear-gradient(to right, rgb(161, 94, 255), rgb(217, 190, 255), rgb(161, 94, 255));
+  background-size: 200% 100%;
+  border-radius: 10px;
+  animation: bar ease-in-out 3s infinite alternate-reverse;
+}
+
+@keyframes bar {
+  0% {
+    background-position: left;
+  }
+  100% {
+    background-position: right;
+  }
+}
+.bar2 {
+  width: 50%;
+}
+
+.svgIcon {
+  position: absolute;
+  left: -25px;
+  margin-top: 18px;
+  z-index: 2;
+  width: 70%;
+  animation: search ease-in-out 3s infinite alternate-reverse;
+}
+
+@keyframes search {
+  0% {
+    transform: translateX(0%) rotate(70deg);
+  }
+  100% {
+    transform: translateX(100px) rotate(10deg);
+  }
+}
+.svgIcon circle,
+line {
+  stroke: rgb(162, 55, 255);
+}
+
+.svgIcon circle {
+  fill: rgba(98, 65, 142, 0.238);
+}
