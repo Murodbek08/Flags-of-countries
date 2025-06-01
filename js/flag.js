@@ -53,7 +53,7 @@ function countriesFullMalumot({
   let tldStr = tld?.join(", ") || "";
   return `
    <div class="countries-full-page-card-image">
-      <img src="${flags.svg}" alt='${flags.alt || "Flag"}' />
+      <img src="${flags.png}" alt='${flags.alt || "Flag"}' />
    </div>
    <div class="countries-full-page-card-texts">
       <h3>${name.common}</h3>

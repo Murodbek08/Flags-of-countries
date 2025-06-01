@@ -194,7 +194,7 @@ function countriesCard({ flags, name, population, region, capital }) {
   return `
     <div class="countries-card">
       <a href="../pages/flag.html?Id=${population}">
-        <img src="${flags.svg}" alt="${flags.alt}" />
+        <img src="${flags.png}" alt="${flags.alt}" />
       </a>
       <div class="countries-text">
         <h3>${name.common}</h3>
