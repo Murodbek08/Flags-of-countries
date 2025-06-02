@@ -167,6 +167,7 @@ async function loadPage(page) {
 
 function countriesCard({ flags = {}, name, population, region, capital }) {
   let img;
+
   if (xhr.status !== 200) {
     img = `https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png`;
   } else if (Boolean(flags.png)) {
