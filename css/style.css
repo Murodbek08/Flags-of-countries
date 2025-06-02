@@ -334,8 +334,8 @@ section .pagination .active {
   }
 }
 .countries-full-page .countries-full-page-card .countries-full-page-card-image {
-  width: clamp 560px;
-  height: 401px;
+  width: clamp(300px, 50vw, 560px);
+  height: clamp(280px, 50vw, 410px);
 }
 .countries-full-page .countries-full-page-card .countries-full-page-card-image img {
   width: 100%;
