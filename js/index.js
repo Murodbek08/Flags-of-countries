@@ -172,7 +172,7 @@ function countriesCard({ flags, name, population, region, capital }) {
     <div class="countries-card">
       <a href="../pages/flag.html?Id=${population}">
         <img class="myImage"  
-             src="${flags.png || flags.svg}" 
+             src="${flags.png || flags.svg}"
              alt="${flags.alt || name.common}" 
              loading="lazy"
              onerror="this.onerror=null; this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUUtqZTac4LP7xdg__N69jhk3NtdUS67HGQS2ySkG7qOIIF7elpFoX23Gcj7lCGCx-aSA&usqp=CAU';"

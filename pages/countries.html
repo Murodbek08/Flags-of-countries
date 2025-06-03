@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Countries</title>
+    <link rel="stylesheet" href="../css/style.min.css" />
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <nav>
+          <div class="nav-logo">
+            <h3>Where in the world?</h3>
+          </div>
+          <button class="dark-mode">
+            <img src="../images/moon.svg" alt="Moon icon ?" />
+            <span>Dark Mode</span>
+          </button>
+        </nav>
+      </div>
+    </header>
+    <section>
+      <div class="container">
+        <div class="section-header">
+          <div class="card-search">
+            <input type="text" placeholder="Search for a country…" />
+            <img src="../images/icon-search-black.svg" alt="Search icon  ?" />
+          </div>
+          <div class="card-sorted">
+            <label for="card"></label>
+            <select id="card">
+              <option value="">Filter by Region</option>
+              <option value="Africa">Africa</option>
+              <option value="America">America</option>
+              <option value="Asia">Asia</option>
+              <option value="Europe">Europe</option>
+              <option value="Oceania">Oceania</option>
+            </select>
+          </div>
+        </div>
+        <div class="countries-cards"></div>
+        <div class="pagination"></div>
+      </div>
+    </section>
+    <script src="../js/index.js"></script>
+    <script src="../js/main.js"></script>
+  </body>
+</html>
