@@ -38,7 +38,9 @@ function getData(url) {
 
 searchInput.addEventListener("keyup", function (el) {
   activePage = 1;
+
   let search = el.target.value.trim().toLowerCase();
+
   if (search == "") {
     async function initPagination() {
       await getAllData();
@@ -165,20 +167,16 @@ async function loadPage(page) {
   });
 }
 
-function countriesCard({ flags = {}, name, population, region, capital }) {
-  let img;
-
-  if (xhr.status !== 200) {
-    img = `https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png`;
-  } else if (Boolean(flags.png)) {
-    img = flags.png;
-  } else if (Boolean(flags.svg)) {
-    img = flags.svg;
-  }
+function countriesCard({ flags, name, population, region, capital }) {
   return `
     <div class="countries-card">
       <a href="../pages/flag.html?Id=${population}">
-       <img  src="${img}" alt="${flags.alt}"  loading="lazy" />
+        <img class="myImage"  
+             src="${flags.png || flags.svg}" 
+             alt="${flags.alt || name.common}" 
+             loading="lazy"
+             onerror="this.onerror=null; this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUUtqZTac4LP7xdg__N69jhk3NtdUS67HGQS2ySkG7qOIIF7elpFoX23Gcj7lCGCx-aSA&usqp=CAU';"
+        />
       </a>
       <div class="countries-text">
         <h3>${name.common}</h3>

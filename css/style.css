@@ -341,6 +341,7 @@ section .pagination .active {
   width: 100%;
   height: 100%;
   background-size: cover;
+  color: white;
 }
 .countries-full-page .countries-full-page-card .countries-full-page-card-texts {
   display: flex;
