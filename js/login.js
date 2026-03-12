@@ -17,7 +17,7 @@ form.addEventListener("submit", async function (e) {
       method: "POST",
       headers: {
         "Content-type": "application/json",
-        "x-api-key": "reqres-free-v1",
+        "x-api-key": "reqres_befd6570bea04c4fb5e1e68d20faee91",
       },
       body: JSON.stringify(user),
     });
