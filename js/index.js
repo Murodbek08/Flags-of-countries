@@ -21,19 +21,20 @@ let loading = `
 `;
 let xhr = new XMLHttpRequest();
 function getData(url) {
-  let pr = new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
+    let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = () => {
-      if (xhr.readyState === 4 && xhr.status === 200) {
-        let countriesData = JSON.parse(xhr.response);
-        resolve(countriesData);
-      } else if (xhr.readyState === 4) {
-        reject(countriesData);
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          resolve(JSON.parse(xhr.response));
+        } else {
+          reject("Xatolik: " + xhr.status);
+        }
       }
     };
     xhr.open("GET", url);
     xhr.send();
   });
-  return pr;
 }
 
 searchInput.addEventListener("keyup", function (el) {
@@ -109,9 +110,16 @@ let activePage = 1;
 let totalPages = 1;
 
 async function getAllData() {
-  let countriesAllData = await getData(`https://restcountries.com/v3.1/all`);
-  totalPages = Math.ceil(countriesAllData.length / 25);
-  return totalPages;
+  try {
+    // Faqat kerakli maydonlarni so'raymiz (400 xatoligi chiqmasligi uchun)
+    let countriesAllData = await getData(
+      `https://restcountries.com/v3.1/all?fields=name`,
+    );
+    totalPages = Math.ceil(countriesAllData.length / 10); // Limit 10 bo'lgani uchun
+    return totalPages;
+  } catch (err) {
+    console.error("Ma'lumot olishda xato:", err);
+  }
 }
 
 async function initPagination() {
