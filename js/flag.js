@@ -23,7 +23,7 @@ function getData(url) {
 }
 
 async function getCountriesName() {
-  let data = await getData(`https://restcountries.eu/rest/v2/all`);
+  let data = await getData(`https://restcountries.com/v3.1/all`);
   let newDataId = data.filter((el) => el.population == +countriesId);
   newDataId.forEach((el) => {
     countriesFullPagecard.innerHTML += countriesFullMalumot(el);

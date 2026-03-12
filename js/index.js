@@ -61,7 +61,7 @@ searchInput.addEventListener("keyup", function (el) {
   } else {
     async function data() {
       let countriesNameData = await getData(
-        `https://restcountries.eu/v3.1/name/${search}`,
+        `https://restcountries.com/v3.1/name/${search}`,
       );
       countriesCards.innerHTML = "";
       countriesNameData.map((el) => {
@@ -94,7 +94,7 @@ select.addEventListener("change", function (e) {
   } else {
     async function regionData() {
       let countriesSelectData = await getData(
-        `https://restcountries.eu/v3.1/region/${selectName}`,
+        `https://restcountries.com/v3.1/region/${selectName}`,
       );
       countriesCards.innerHTML = "";
       countriesSelectData.map((el) => {
@@ -109,7 +109,7 @@ let activePage = 1;
 let totalPages = 1;
 
 async function getAllData() {
-  let countriesAllData = await getData(`https://restcountries.eu/v3.1/all`);
+  let countriesAllData = await getData(`https://restcountries.com/v3.1/all`);
   totalPages = Math.ceil(countriesAllData.length / 25);
   return totalPages;
 }
