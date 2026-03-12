@@ -3,23 +3,11 @@ let countriesCards = document.querySelector(".countries-cards");
 let select = document.querySelector("select");
 let pagination = document.querySelector(".pagination");
 
-let loading = `
-  <div class="loading">
-    <div class="loader">
-      <div class="loaderMiniContainer">
-        <div class="barContainer">
-          <span class="bar"></span>
-          <span class="bar bar2"></span>
-        </div>
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 101 114" class="svgIcon">
-          <circle stroke-width="7" stroke="black" transform="rotate(36.0692 46.1726 46.1727)" r="29.5497" cy="46.1727" cx="46.1726"></circle>
-          <line stroke-width="7" stroke="black" y2="111.784" x2="97.7088" y1="67.7837" x1="61.7089"></line>
-        </svg>
-      </div>
-    </div>
-  </div>
-`;
-let xhr = new XMLHttpRequest();
+let allCountries = []; // Barcha davlatlar saqlanadigan massiv
+let activePage = 1;
+let limit = 12; // Bir sahifada ko'rinadigan davlatlar soni
+
+// API dan ma'lumot olish
 function getData(url) {
   return new Promise((resolve, reject) => {
     let xhr = new XMLHttpRequest();
@@ -37,161 +25,93 @@ function getData(url) {
   });
 }
 
-searchInput.addEventListener("keyup", function (el) {
-  activePage = 1;
-
-  let search = el.target.value.trim().toLowerCase();
-
-  if (search == "") {
-    async function initPagination() {
-      await getAllData();
-      renderPaginationButtons();
-      await loadPage(activePage);
-    }
-    initPagination();
-    countriesCards.innerHTML = loading;
-    async function loadPage(page) {
-      let newData = await getData(
-        `https://ap-countries-api.vercel.app/all?page=${page}&limit=10`,
-      );
-      countriesCards.innerHTML = "";
-      newData.data.forEach((el) => {
-        countriesCards.innerHTML += countriesCard(el);
-      });
-    }
-  } else {
-    async function data() {
-      let countriesNameData = await getData(
-        `https://restcountries.com/v3.1/name/${search}`,
-      );
-      countriesCards.innerHTML = "";
-      countriesNameData.map((el) => {
-        countriesCards.innerHTML += countriesCard(el);
-      });
-    }
-    data();
-  }
-});
-
-select.addEventListener("change", function (e) {
-  let selectName = this.value.trim().toLowerCase();
-  if (selectName == "") {
-    async function initPagination() {
-      await getAllData();
-      renderPaginationButtons();
-      await loadPage(activePage);
-    }
-    initPagination();
-    countriesCards.innerHTML = loading;
-    async function loadPage(page) {
-      let newData = await getData(
-        `https://ap-countries-api.vercel.app/all?page=${page}&limit=10`,
-      );
-      countriesCards.innerHTML = "";
-      newData.data.forEach((el) => {
-        countriesCards.innerHTML += countriesCard(el);
-      });
-    }
-  } else {
-    async function regionData() {
-      let countriesSelectData = await getData(
-        `https://restcountries.com/v3.1/region/${selectName}`,
-      );
-      countriesCards.innerHTML = "";
-      countriesSelectData.map((el) => {
-        countriesCards.innerHTML += countriesCard(el);
-      });
-    }
-    regionData();
-  }
-});
-
-let activePage = 1;
-let totalPages = 1;
-
-async function getAllData() {
-  try {
-    // Faqat kerakli maydonlarni so'raymiz (400 xatoligi chiqmasligi uchun)
-    let countriesAllData = await getData(
-      `https://restcountries.com/v3.1/all?fields=name`,
-    );
-    totalPages = Math.ceil(countriesAllData.length / 10); // Limit 10 bo'lgani uchun
-    return totalPages;
-  } catch (err) {
-    console.error("Ma'lumot olishda xato:", err);
-  }
-}
-
-async function initPagination() {
-  await getAllData();
-  renderPaginationButtons();
-  await loadPage(activePage);
-}
-initPagination();
-
-function renderPaginationButtons() {
-  pagination.innerHTML = "";
-  pagination.innerHTML += `<button onclick="paginationItemBack()"><img src="../images/chevron-left.svg" alt="Chevron icon"></button>`;
-
-  for (let i = 1; i <= totalPages; i++) {
-    pagination.innerHTML += `<button class="${
-      activePage === i ? "active" : ""
-    }" onclick="paginationItem(${i})">${i}</button>`;
-  }
-  pagination.innerHTML += `<button onclick="paginationItemNext()"><img src="../images/chevron-right.svg" alt="Chevron icon"></button>`;
-}
-
-function paginationItemBack() {
-  if (activePage > 1) {
-    activePage--;
-    updatePage();
-  }
-}
-
-function paginationItemNext() {
-  if (activePage < totalPages) {
-    activePage++;
-    updatePage();
-  }
-}
-
-function paginationItem(i) {
-  activePage = i;
-  updatePage();
-}
-
-async function updatePage() {
-  await loadPage(activePage);
-  renderPaginationButtons();
-}
-countriesCards.innerHTML = loading;
-async function loadPage(page) {
-  let newData = await getData(
-    `https://ap-countries-api.vercel.app/all?page=${page}&limit=10`,
+// Barcha ma'lumotni yuklab olish
+async function init() {
+  countriesCards.innerHTML = "Yuklanmoqda...";
+  // CORS xatosi chiqmasligi uchun faqat restcountries.com dan foydalanamiz
+  allCountries = await getData(
+    "https://restcountries.com/v3.1/all?fields=name,flags,population,region,capital",
   );
+  renderCards(activePage);
+  renderPaginationButtons();
+}
+
+// Sahifadagi kartalarni chizish
+function renderCards(page) {
   countriesCards.innerHTML = "";
-  newData.data.forEach((el) => {
+  let start = (page - 1) * limit;
+  let end = start + limit;
+  let pageData = allCountries.slice(start, end);
+
+  pageData.forEach((el) => {
     countriesCards.innerHTML += countriesCard(el);
   });
 }
 
+// Pagination tugmalarini chizish
+function renderPaginationButtons() {
+  let totalPages = Math.ceil(allCountries.length / limit);
+  pagination.innerHTML = "";
+
+  for (let i = 1; i <= totalPages; i++) {
+    pagination.innerHTML += `<button class="${activePage === i ? "active" : ""}" onclick="changePage(${i})">${i}</button>`;
+  }
+}
+
+function changePage(i) {
+  activePage = i;
+  renderCards(activePage);
+  renderPaginationButtons();
+}
+
+// Qidiruv funksiyasi
+searchInput.addEventListener("keyup", function (e) {
+  let search = e.target.value.trim().toLowerCase();
+  let filteredData = allCountries.filter((el) =>
+    el.name.common.toLowerCase().includes(search),
+  );
+
+  countriesCards.innerHTML = "";
+  filteredData
+    .slice(0, limit)
+    .forEach((el) => (countriesCards.innerHTML += countriesCard(el)));
+  pagination.innerHTML = ""; // Qidiruv vaqtida pagination-ni yashiramiz
+});
+
+// Region bo'yicha filter
+select.addEventListener("change", async function () {
+  let region = this.value;
+  if (region === "") {
+    init();
+  } else {
+    allCountries = await getData(
+      `https://restcountries.com/v3.1/region/${region}?fields=name,flags,population,region,capital`,
+    );
+    activePage = 1;
+    renderCards(activePage);
+    renderPaginationButtons();
+  }
+});
+
 function countriesCard({ flags, name, population, region, capital }) {
   return `
     <div class="countries-card">
-      <a href="../pages/flag.html?Id=${population}">
-        <img class="myImage"  
-             src="${flags.png || flags.svg}"
-             alt="${flags.alt || name.common}" 
-             loading="lazy"
-             onerror="this.onerror=null; this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUUtqZTac4LP7xdg__N69jhk3NtdUS67HGQS2ySkG7qOIIF7elpFoX23Gcj7lCGCx-aSA&usqp=CAU';"
-        />
+      <a href="../pages/flag.html?name=${name.common}">
+       <img
+  class="myImage"
+  src="${flags.png || flags.svg}"
+  alt="${flags.alt || name.common}"
+  loading="lazy"
+  onerror="this.onerror=null; this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUUtqZTac4LP7xdg__N69jhk3NtdUS67HGQS2ySkG7qOIIF7elpFoX23Gcj7lCGCx-aSA&usqp=CAU';"
+/>
       </a>
       <div class="countries-text">
         <h3>${name.common}</h3>
-        <h4>Population:<span> ${population}</span></h4>
+        <h4>Population:<span> ${population.toLocaleString()}</span></h4>
         <h4>Region:<span> ${region}</span></h4>
-        <h4>Capital:<span> ${capital}</span></h4>
+        <h4>Capital:<span> ${capital ? capital[0] : "N/A"}</span></h4>
       </div>
-    </div>
-  `;
+    </div>`;
 }
+
+init();
